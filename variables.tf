@@ -14,8 +14,9 @@ variable "subnet_id" {
 }
 
 variable "relay_endpoint" {
-  description = "HTTPS endpoint of the relay this daemon connects to"
+  description = "WSS endpoint of the relay this daemon connects to (leave empty for sender-only daemons)"
   type        = string
+  default     = ""
 }
 
 variable "api_endpoint" {
@@ -57,4 +58,16 @@ variable "watch_directories" {
   description = "List of local directories the daemon watches for outbound files"
   type        = list(string)
   default     = []
+}
+
+variable "daemon_mode" {
+  description = "Daemon mode: sender, receiver, or both. Receiver/both require relay_id."
+  type        = string
+  default     = "sender"
+}
+
+variable "relay_id" {
+  description = "ID of the relay this daemon routes through (required for receiver/both modes)"
+  type        = string
+  default     = ""
 }

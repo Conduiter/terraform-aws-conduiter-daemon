@@ -243,6 +243,8 @@ resource "aws_instance" "daemon" {
   user_data = base64encode(templatefile("${path.module}/user_data.sh.tpl", {
     aws_region          = data.aws_region.current.name
     daemon_name         = var.daemon_name
+    daemon_mode         = var.daemon_mode
+    relay_id            = var.relay_id
     relay_endpoint      = var.relay_endpoint
     api_endpoint        = var.api_endpoint
     org_token           = var.org_token
