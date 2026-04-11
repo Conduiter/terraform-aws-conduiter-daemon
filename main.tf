@@ -245,6 +245,7 @@ resource "aws_instance" "daemon" {
     daemon_name         = var.daemon_name
     relay_endpoint      = var.relay_endpoint
     api_endpoint        = var.api_endpoint
+    org_token           = var.org_token
     secret_arn          = aws_secretsmanager_secret.daemon_keypair.arn
     s3_bucket           = var.s3_bucket
     image_tag           = var.image_tag
