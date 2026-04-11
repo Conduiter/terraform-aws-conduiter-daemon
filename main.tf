@@ -98,6 +98,11 @@ resource "aws_iam_role" "daemon" {
   }
 }
 
+resource "aws_iam_role_policy_attachment" "daemon_ssm" {
+  role       = aws_iam_role.daemon.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
 resource "aws_iam_role_policy" "daemon_s3" {
   name = "s3-read-write"
   role = aws_iam_role.daemon.id
@@ -228,11 +233,12 @@ resource "aws_security_group" "daemon" {
 # -----------------------------------------------------------------------------
 
 resource "aws_instance" "daemon" {
-  ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = var.instance_type
-  subnet_id              = var.subnet_id
-  iam_instance_profile   = aws_iam_instance_profile.daemon.name
-  vpc_security_group_ids = [aws_security_group.daemon.id]
+  ami                         = data.aws_ami.amazon_linux.id
+  instance_type               = var.instance_type
+  subnet_id                   = var.subnet_id
+  iam_instance_profile        = aws_iam_instance_profile.daemon.name
+  vpc_security_group_ids      = [aws_security_group.daemon.id]
+  associate_public_ip_address = true
 
   user_data = base64encode(templatefile("${path.module}/user_data.sh.tpl", {
     aws_region          = data.aws_region.current.name

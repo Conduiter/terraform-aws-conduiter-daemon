@@ -22,7 +22,7 @@ until docker info > /dev/null 2>&1; do
 done
 
 # Pull the daemon image
-docker pull public.ecr.aws/conduiter/daemon:${image_tag}
+docker pull public.ecr.aws/y8p4n9c1/daemon:${image_tag}
 
 # Create data directory
 mkdir -p /data
@@ -55,7 +55,7 @@ ExecStart=/usr/bin/docker run \
   -e STORE_PATH=/data \
   -e AWS_REGION=${aws_region} \
   -v /data:/data \
-  public.ecr.aws/conduiter/daemon:${image_tag}
+  public.ecr.aws/y8p4n9c1/daemon:${image_tag}
 ExecStop=/usr/bin/docker stop conduiter-daemon
 
 [Install]
