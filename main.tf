@@ -162,6 +162,7 @@ resource "aws_iam_role_policy" "daemon_secrets" {
         Effect = "Allow"
         Action = [
           "secretsmanager:GetSecretValue",
+          "secretsmanager:PutSecretValue",
           "secretsmanager:DescribeSecret"
         ]
         Resource = [
