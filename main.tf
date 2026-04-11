@@ -244,7 +244,7 @@ resource "aws_instance" "daemon" {
     aws_region          = data.aws_region.current.name
     daemon_name         = var.daemon_name
     daemon_mode         = var.daemon_mode
-    relay_id            = var.relay_id
+    relay_name          = var.relay_name
     relay_endpoint      = var.relay_endpoint
     api_endpoint        = var.api_endpoint
     org_token           = var.org_token

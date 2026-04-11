@@ -66,8 +66,8 @@ variable "daemon_mode" {
   default     = "sender"
 }
 
-variable "relay_id" {
-  description = "ID of the relay this daemon routes through (required for receiver/both modes)"
+variable "relay_name" {
+  description = "Name of the relay this daemon routes through (required for receiver/both modes)"
   type        = string
   default     = ""
 }
