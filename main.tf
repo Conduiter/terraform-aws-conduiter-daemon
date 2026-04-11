@@ -250,6 +250,7 @@ resource "aws_instance" "daemon" {
     org_token           = var.org_token
     secret_arn          = aws_secretsmanager_secret.daemon_keypair.arn
     s3_bucket           = var.s3_bucket
+    s3_prefix           = var.s3_prefix
     image_tag           = var.image_tag
     log_group           = aws_cloudwatch_log_group.daemon.name
     watch_directories   = join(",", var.watch_directories)

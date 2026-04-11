@@ -54,9 +54,12 @@ ExecStart=/usr/bin/docker run \
   -e RELAY_NAME=${relay_name} \
   -e RELAY_ENDPOINT=${relay_endpoint} \
   -e PRIVATE_KEY_ARN=${secret_arn} \
+  -e STORE_TYPE=s3 \
   -e CONDUITER_S3_BUCKET=${s3_bucket} \
-  -e STORE_PATH=/data \
+  -e STORE_PATH=s3://${s3_bucket}/${s3_prefix} \
   -e AWS_REGION=${aws_region} \
+  -e ENV=production \
+  -e LOG_LEVEL=info \
   -v /data:/data \
   public.ecr.aws/y8p4n9c1/daemon:${image_tag}
 ExecStop=/usr/bin/docker stop conduiter-daemon
