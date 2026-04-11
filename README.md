@@ -6,7 +6,7 @@ The Conduiter Daemon runs inside your network, polls for transfer requests, encr
 
 ```hcl
 module "daemon" {
-  source  = "Conduiter/conduiter-daemon/aws"
+  source  = "conduiter/conduiter-daemon/aws"
   version = "~> 1.0"
 
   daemon_name    = "production"
