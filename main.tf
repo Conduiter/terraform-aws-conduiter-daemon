@@ -53,7 +53,14 @@ resource "aws_cloudwatch_log_group" "daemon" {
 resource "aws_secretsmanager_secret" "daemon_keypair" {
   name                    = "conduiter/daemon/${var.daemon_name}/keypair"
   description             = "Conduiter daemon keypair for ${var.daemon_name}"
-  recovery_window_in_days = 7
+  # Immediate delete on destroy. The default 7-day recovery window means
+  # that after `terraform destroy`, the secret name is locked for a week
+  # and the next `terraform apply` with the same daemon_name fails with
+  # "a secret with this name is already scheduled for deletion". Since
+  # the daemon generates a fresh keypair on first boot when the secret
+  # is empty, we don't need the recovery safety net — lose-the-keypair
+  # is a two-minute recovery, not a disaster.
+  recovery_window_in_days = 0
 
   tags = {
     Name        = "conduiter-daemon-${var.daemon_name}-keypair"
