@@ -52,4 +52,4 @@ module "daemon" {
 | iam_role_arn | ARN of the daemon IAM role |
 | secret_arn | ARN of the Secrets Manager secret storing the daemon keypair |
 
-See the [full documentation](https://docs.conduiter.com/getting-started/aws-setup) for detailed setup instructions.
+See the [full documentation](https://app.conduiter.com/docs/getting-started/aws-setup) for detailed setup instructions.
